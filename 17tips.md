@@ -14,7 +14,7 @@ Tôi thực sự có ý đó. [Tài liệu](https://getcomposer.org/doc/) rất 
 
 ## Lời khuyên #2: Hiểu rõ sự khác nhau giữa "project" và "library"  
 
-Điều này rất quan trọng, rặng liệu bạn đang tạo một "project" hay một "library". Mỗi loại sẽ yêu cầu sự luyện tập riêng biệt.  
+Điều này rất quan trọng, rằng liệu bạn đang tạo một "project" hay một "library". Mỗi loại sẽ yêu cầu sự luyện tập riêng biệt.  
 
 "library" là một package có thể tái sử dụng và bạn có thể thêm vào như một dependency - như là `symfony/symfony`, `doctrine/orm` hoặc [`elasticsearch/elasticsearch`](https://github.com/elastic/elasticsearch-php).  
 
@@ -25,7 +25,7 @@ Tôi sẽ phân biệt giữa "library" và project trong các lời khuyên bê
 
 ## Lời khuyên #3: Dùng các phiên bản dependency cụ thể  cho ứng dụng  
 
-Neus bạn đang tạo một ứng dụng, bạn nên dùng phiên bản cụ thể nhất để miêu tả dependency.Nếu bạn cần phân tích file YAML, bạn nên chỉ rõ dependency như thế này: `"symfony/yaml": "4.0.2"`.
+Nếu bạn đang tạo một ứng dụng, bạn nên dùng phiên bản cụ thể nhất để miêu tả dependency. Nếu bạn cần phân tích file YAML, bạn nên chỉ rõ dependency như thế này: `"symfony/yaml": "4.0.2"`.
 
 Thậm chí nếu thư viện tuân theo [Semantic Versioning](https://semver.org/), Vẫn có thể có sự phá vỡ khả năng tương thích ngược  giữa các bản nhỏ và bản vá. Lấy ví dụ, nếu bạn đang dùng `"symfony/symfony": "^3.1"`,Có thể những thứ không dùng trong 3.2 có thẻ phá honggr bài test ứng dụng của bạn, hoặc cũng có thể có các bug đã được sửa trong PHP_CodeSniffer và nó sẽ phát hiện các dạng vấn đề mới trong code của bạn, và 1 lần nữa nó có thể dẫn tới cấu trúc code hỏng.
 
@@ -41,7 +41,7 @@ Nếu bạn đang tạo một thư viện, bạn nên định nghĩa khoảng ph
     "symfony/yaml": "^3.0 || ^4.0"
     
 
-Có nghĩ là thư viện của bạn có thể sử dụng `symfony/yaml` với Symfony 3.x hoặc 4.x . It is important, điều này rất quan trọng vì những hạn chế này sẽ được chuyển tới ứng dụng sử dụng thư viện của bạn.  
+Có nghĩ là thư viện của bạn có thể sử dụng `symfony/yaml` với Symfony 3.x hoặc 4.x . Đđiều này rất quan trọng vì những hạn chế này sẽ được chuyển tới ứng dụng sử dụng thư viện của bạn.  
 
 Trong trường hợp có 2 thư viện với yêu cầu mâu thuẫn nhau, ví dụ 1 cái yêu cầu ~3.1.0 và cái kia yêu cầu ~3.2.0, thì quá trình cài đặt sẽ thất bại.  
 
@@ -49,7 +49,7 @@ Trong trường hợp có 2 thư viện với yêu cầu mâu thuẫn nhau, ví 
 
 Nếu bạn đang tạo 1 project, bạn chắc chắn muốn commit `composer.lock`lên git. Điều này sẽ đảm bảo tất cả mọi người - bạn, đồng nghiệp của bạn, server CI của bạn và server product của bạn - đang chạy ứng dụng với cùng các phiên bản dependency.
 
-Thoạt nhìn, nó nghe có vẻ vô dụng - bạn đã sử dụng 1 phiên bản cụ thể theo những ràng buộc được đề cập trong lời khuyên #3. Nhưng không, cũng có những phụ thuộc trong những dependency của bạn lại không bị hạn chế bởi những ràng buộc này (ví dụ `symfony/console` phụ thuộc vào `symfony/polyfill-mbstring`). Vì vậy nếu không commit file composer.lock, bạn sẽ không thể lấy được những bộ dependency giống nhau.  
+Thoạt nhìn, nó nghe có vẻ vô dụng - bạn đã sử dụng 1 phiên bản cụ thể theo những ràng buộc được đề cập trong lời khuyên #3. Nhưng không, cũng có những dependency trong các dependency của bạn lại không bị hạn chế bởi những ràng buộc này (ví dụ `symfony/console` phụ thuộc vào `symfony/polyfill-mbstring`). Vì vậy nếu không commit file composer.lock, bạn sẽ không thể lấy được những bộ dependency giống nhau.  
 
 ## Lời khuyên #6: Để  composer.lock trong .gitignore ở các thư viện.  
 Nếu bạn đang tạo 1 thư viện (hãy gọi nó là `acme/my-library`), bạn không nên commit file composer.lock. Nó [Không tạo ảnh hưởng gì](https://getcomposer.org/doc/02-libraries.md#lock-file) cho các project đang sử dụng thư viện của bạn.  
@@ -148,7 +148,7 @@ Bạn có thể sử dụng câu lệnh `composer oudated` để xem các depend
 **Với mỗi dependency quá hạn thì thực hiện các bước sau đây:**
 
   1. Tạo một nhánh mới
-  2. Cập nhật phiên bản phụ thuộc trong `composer.json` lên phiên bản mới nhất.
+  2. Cập nhật phiên bản dependency trong `composer.json` lên phiên bản mới nhất.
   3. Chạy lệnh `composer update phpunit/phpunit --with-dependencies` (thay `phpunit/phpunit` bằng thư viện bạn đang update)
   4. Kiểm tra CHANGELOG trong repo thư viện trên Github để xem có sự thay đổi nào hỏng không. Nếu có cập nhật ứng dụng.
   5. Kiểm tra thử ứng dụng trên local (Nếu đang sử dụng Symfony, bạn có thể thấy các cảnh báo phản đối trong Debug Bar)
@@ -156,17 +156,17 @@ Bạn có thể sử dụng câu lệnh `composer oudated` để xem các depend
   7. Đợi kiến trúc CI hoàn thành
   8. Merge và deploy
 
-Đôi khi sẽ xảy ra vấn đề khi cập nhật nhiều phụ thuộc cùng lúc, ví dụ như khi bạn cập nhật Doctrine hay Symfony. Trường hợp này bạn có thể liệt kê tất cả trong câu lệnh update.  
+Đôi khi sẽ xảy ra vấn đề khi cập nhật nhiều dependency cùng lúc, ví dụ như khi bạn cập nhật Doctrine hay Symfony. Trường hợp này bạn có thể liệt kê tất cả trong câu lệnh update.  
 
 
     composer update symfony/symfony symfony/monolog-bundle --with-dependencies
     
 
-Hoặc bạn cũng có thể sử dụng wildcard để cập nhật tất cả các phụ thuộc theo 1 namespace cụ thể:  
+Hoặc bạn cũng có thể sử dụng wildcard để cập nhật tất cả các dependency theo 1 namespace cụ thể:  
     
     composer update symfony/* --with-dependencies
     
-Tôi biết rằng tất cả những điều này nghe có vẻ thừa thãi, nhưng bạn chắc chắn sẽ cập nhật các phụ thuộc 1 cách tình cờ, an toàn hơn vẫn đáng.  
+Tôi biết rằng tất cả những điều này nghe có vẻ thừa thãi, nhưng bạn chắc chắn sẽ cập nhật các dependency 1 cách tình cờ, an toàn hơn vẫn đáng.  
 
 Một các ngắn gọn mà mọi người chấp nhận thực hiện là cập nhật tất cả các dependency `require-dev` cùng lúc (nếu chúng không yêu cầu những thay đổi bên trong code, mặt khác tôi khuyên bạn nên sử dụng các nhánh riêng biệt để dễ dàng review code).  
 
