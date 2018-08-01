@@ -27,7 +27,7 @@ Tôi sẽ phân biệt giữa "library" và project trong các lời khuyên bê
 
 Nếu bạn đang tạo một ứng dụng, bạn nên dùng phiên bản cụ thể nhất để miêu tả dependency. Nếu bạn cần phân tích file YAML, bạn nên chỉ rõ dependency như thế này: `"symfony/yaml": "4.0.2"`.
 
-Thậm chí nếu thư viện tuân theo [Semantic Versioning](https://semver.org/), Vẫn có thể có sự phá vỡ khả năng tương thích ngược  giữa các bản nhỏ và bản vá. Lấy ví dụ, nếu bạn đang dùng `"symfony/symfony": "^3.1"`,Có thể những thứ không dùng trong 3.2 có thẻ phá honggr bài test ứng dụng của bạn, hoặc cũng có thể có các bug đã được sửa trong PHP_CodeSniffer và nó sẽ phát hiện các dạng vấn đề mới trong code của bạn, và 1 lần nữa nó có thể dẫn tới cấu trúc code hỏng.
+Thậm chí nếu thư viện tuân theo [Semantic Versioning](https://semver.org/), Vẫn có thể có sự phá vỡ khả năng tương thích ngược  giữa các bản nhỏ và bản vá. Lấy ví dụ, nếu bạn đang dùng `"symfony/symfony": "^3.1"`,Có thể những thứ không dùng trong 3.2 có thẻ phá hỏng bài test ứng dụng của bạn, hoặc cũng có thể có các bug đã được sửa trong PHP_CodeSniffer và nó sẽ phát hiện các dạng vấn đề mới trong code của bạn, và 1 lần nữa nó có thể dẫn tới cấu trúc code hỏng.
 
 Việc cập nhật các dependency cũng phải thật thận trọng, không thể tùy tiện được. 1 trong những lời khuyên bên dưới sẽ thảo luận về điều này chi tiết hơn.
 
@@ -35,13 +35,13 @@ Nghe có vẻ hơi quá, nhưng điều này sẽ ngăn việc các đồng nghi
 
 ## Lời khuyên #4: Sử dụng các khoảng phiên bản cho các dependency của thư viện  
 
-Nếu bạn đang tạo một thư viện, bạn nên định nghĩa khoảng phiên bản rộng nhát có thể .Nếu bạn tạo một thư viện dùng `symfony/yaml` để phân tích cú pháp YAML, bạ nên require như sau:  
+Nếu bạn đang tạo một thư viện, bạn nên định nghĩa khoảng phiên bản rộng nhát có thể . Nếu bạn tạo một thư viện dùng `symfony/yaml` để phân tích cú pháp YAML, bạn nên require như sau:  
     
     
     "symfony/yaml": "^3.0 || ^4.0"
     
 
-Có nghĩ là thư viện của bạn có thể sử dụng `symfony/yaml` với Symfony 3.x hoặc 4.x . Đđiều này rất quan trọng vì những hạn chế này sẽ được chuyển tới ứng dụng sử dụng thư viện của bạn.  
+Có nghĩa là thư viện của bạn có thể sử dụng `symfony/yaml` với Symfony 3.x hoặc 4.x . Điều này rất quan trọng vì những hạn chế này sẽ được chuyển tới ứng dụng sử dụng thư viện của bạn.  
 
 Trong trường hợp có 2 thư viện với yêu cầu mâu thuẫn nhau, ví dụ 1 cái yêu cầu ~3.1.0 và cái kia yêu cầu ~3.2.0, thì quá trình cài đặt sẽ thất bại.  
 
@@ -52,7 +52,7 @@ Nếu bạn đang tạo 1 project, bạn chắc chắn muốn commit `composer.l
 Thoạt nhìn, nó nghe có vẻ vô dụng - bạn đã sử dụng 1 phiên bản cụ thể theo những ràng buộc được đề cập trong lời khuyên #3. Nhưng không, cũng có những dependency trong các dependency của bạn lại không bị hạn chế bởi những ràng buộc này (ví dụ `symfony/console` phụ thuộc vào `symfony/polyfill-mbstring`). Vì vậy nếu không commit file composer.lock, bạn sẽ không thể lấy được những bộ dependency giống nhau.  
 
 ## Lời khuyên #6: Để  composer.lock trong .gitignore ở các thư viện.  
-Nếu bạn đang tạo 1 thư viện (hãy gọi nó là `acme/my-library`), bạn không nên commit file composer.lock. Nó [Không tạo ảnh hưởng gì](https://getcomposer.org/doc/02-libraries.md#lock-file) cho các project đang sử dụng thư viện của bạn.  
+Nếu bạn đang tạo 1 thư viện (hãy gọi nó là `acme/my-library`), bạn không nên commit file composer.lock. Nó [không tạo ảnh hưởng gì](https://getcomposer.org/doc/02-libraries.md#lock-file) cho các project đang sử dụng thư viện của bạn.  
 
 Tưởng tượng rằng `acme/my-library` sử dụng `monolog/monolog` như là một dependency. Nếu bạn commit `composer.lock`, những người phát triển `acme/my-library` có thể đang sử dụng một phiên bản cũ của Monolog. Nhưng khi thư viện hoàn thành, và bạn sử dụng nó trong các project thật, 1 phiên bản mới của Monolog có thể được cài đặt, và nó không còn tương thích với thư viện nữa. Nhưng bạn lại không hề đề ý đến điều đó, bởi vì `composer.lock`.  
 
@@ -62,11 +62,11 @@ Nếu bạn muốn chắc chắn rằng thư viện tương thích với các ph
 
 ## Tip #7: Chạy các kiến trúc Travis CI với nhiều phiên bản dependency  
 
-> Lời khuyên này chỉ áp dụng cho các thư viện ( vì bạn sử dụng các phiên bản cụ thể cho các ứng dụng).  
+> Lời khuyên này chỉ áp dụng cho các thư viện (vì bạn sử dụng các phiên bản cụ thể cho các ứng dụng).  
 
 Nếu bạn đang xây dựng 1 thư viện mã nguồn mở, bạn chắc hẳn đang sử dụng Travis CI để dựng kiến trúc của nó.  
 
-Mặc định, Composer sẽ cài đặt phiên bản lớn nhất có thể của các dependency được cho phép bởi sự ràng buộc trong `composer.json`. Điều này có nghĩa là đối với dependency ràng buộc  `^3.0 || ^4.0`, các kiến trúc sẽ luôn sử dụng phiên bản lớn nhất của các v4 được phát hành. Vì phiên bản 3.0 không bao giờ được kiểm tra, thư viện có thể sẽ không tương thích với nó và điều này có thể khiến người dùng của bạn cảm thấy không buồn.  
+Mặc định, Composer sẽ cài đặt phiên bản lớn nhất có thể của các dependency được cho phép bởi sự ràng buộc trong `composer.json`. Điều này có nghĩa là đối với dependency ràng buộc  `^3.0 || ^4.0`, các kiến trúc sẽ luôn sử dụng phiên bản lớn nhất của các v4 được phát hành. Vì phiên bản 3.0 không bao giờ được kiểm tra, thư viện có thể sẽ không tương thích với nó và điều này có thể khiến người dùng của bạn cảm thấy buồn.  
 
 May mắn là, Composer cung cấp 1 bộ chuyển đổi để cài đặt phiên bản thấp nhất có thể của dependency `--prefer-lowest` ( nên sử dụng `--prefer-stable` để tránh cài đặt các phiên bản không ổn định).  
 
@@ -100,7 +100,7 @@ Mặc dù giải pháp này sẽ khắc phục được hầu hết các vấn �
 
 Sẽ rất hay nếu để các package trong mục `require` và `require-dev` được sắp sếp bởi tên. Nó có thể giúp tránh những xung đột gộp không cần thiết khi rebase một nhánh. Bởi vì nếu bạn thêm 1 package vào cuối danh sách trong 2 nhánh, sẽ luôn có những xung đột khi gộp.  
 
-Đây là việc tẻ nhạt  khi làm thử công, nên tốt nhất là [Điều chỉnh]](https://getcomposer.org/doc/06-config.md#sort-packages) trong
+Đây là việc tẻ nhạt  khi làm thủ công, nên tốt nhất là [điều chỉnh]](https://getcomposer.org/doc/06-config.md#sort-packages) trong
 `composer.json`:  
 
     
