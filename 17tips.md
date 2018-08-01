@@ -60,13 +60,13 @@ Vậy tốt nhất là để `composer.lock` vào trong `.gitignore` để bạn
 
 Nếu bạn muốn chắc chắn rằng thư viện tương thích với các phiên bản khác nhau của các dependency, đọc lời khuyên tiếp theo.  
 
-## Tip #7: Chạy các kiến trúc Travis CI với nhiều phiên bản dependency  
+## Lời khuyên #7: Chạy các bản build Travis CI với nhiều phiên bản dependency  
 
 > Lời khuyên này chỉ áp dụng cho các thư viện (vì bạn sử dụng các phiên bản cụ thể cho các ứng dụng).  
 
-Nếu bạn đang xây dựng 1 thư viện mã nguồn mở, bạn chắc hẳn đang sử dụng Travis CI để dựng kiến trúc của nó.  
+Nếu bạn đang xây dựng 1 thư viện mã nguồn mở, bạn chắc hẳn đang sử dụng Travis CI để chạy các bản build của nó.  
 
-Mặc định, Composer sẽ cài đặt phiên bản lớn nhất có thể của các dependency được cho phép bởi sự ràng buộc trong `composer.json`. Điều này có nghĩa là đối với dependency ràng buộc  `^3.0 || ^4.0`, các kiến trúc sẽ luôn sử dụng phiên bản lớn nhất của các v4 được phát hành. Vì phiên bản 3.0 không bao giờ được kiểm tra, thư viện có thể sẽ không tương thích với nó và điều này có thể khiến người dùng của bạn cảm thấy buồn.  
+Mặc định, Composer sẽ cài đặt phiên bản lớn nhất có thể của các dependency được cho phép bởi sự ràng buộc trong `composer.json`. Điều này có nghĩa là đối với dependency ràng buộc  `^3.0 || ^4.0`, các bản build sẽ luôn sử dụng phiên bản lớn nhất của các v4 được phát hành. Vì phiên bản 3.0 không bao giờ được kiểm tra, thư viện có thể sẽ không tương thích với nó và điều này có thể khiến người dùng của bạn cảm thấy buồn.  
 
 May mắn là, Composer cung cấp 1 bộ chuyển đổi để cài đặt phiên bản thấp nhất có thể của dependency `--prefer-lowest` ( nên sử dụng `--prefer-stable` để tránh cài đặt các phiên bản không ổn định).  
 
@@ -117,7 +117,7 @@ Lần tới, bạn `require` 1 package mới, nó sẽ được thêm vào chỗ
 
 ## Lời khuyênp #9:  Đừng thử gộp composer.lock khi rebase hay merge  
 
-Nếu bạn thêm 1 dependency mới vào `composer.json` (và `composer.lock`) trước khi nhánh của bạn được gộp, có 1 dependency khác đãđược thêm ở master, bạn cần rebase nhánh của bạn. Và bạn sẽ nhận 1 merge-conflict trong `composer.lock`.  
+Nếu bạn thêm 1 dependency mới vào `composer.json` (và `composer.lock`) trước khi nhánh của bạn được gộp, có 1 dependency khác đã được thêm ở master, bạn cần rebase nhánh của bạn. Và bạn sẽ nhận 1 merge-conflict trong `composer.lock`.  
 
 Bạn đừng bảo giờ cố giải quyết xung đột này thủ công, vì file `composer.lock` chứa từng phần của các dependency đã định nghĩa trong `composer.json`. Vì vậy nếu bạn giải quyết được xung đột, kết quả file lock vẫn sẽ sai.  
 
@@ -198,7 +198,7 @@ Bạn cũng có thể định nghĩa các extensions được yêu cầu trong �
 
 ## Lời khuyên #14: Dùng Composer plugin trong PHPStorm  
 
-Có [composer.json plugin echo PHPStorm](https://plugins.jetbrains.com/plugin/7631-php-composer-json-support). Nó thêm tự động hoàn thiện và xác thực khi thay đổi`composer.json` thủ công.  
+Có một [composer.json plugin echo PHPStorm](https://plugins.jetbrains.com/plugin/7631-php-composer-json-support). Khi ta sửa composer.json bằng tay, autocompletion và một vài validation sẽ được hỗ trợ.  
 Nếu bạn đang dùng ide khác (hay code editor), bạn có thể thiết lập [JSON schema](https://getcomposer.org/schema.json).  
 
 ## Lời khuyên #15: Chỉ rõ phiên bản PHP trong `composer.json`  
@@ -253,9 +253,9 @@ Sau đó dùng package như bạn làm thủ công:
 
 ## Lời khuyên #17: Làm sao để tạm thời sử dụng 1 nhánh với bugfix từ fork  
 
-Nếu bạn tìm ra bg trong vài thư viện được public và sủa nó trong bản fork trên github, bạn cần cài thư viện từ repo này thay vì bản official (cho đến khi bugfix được hợp và bản đã sửa được phát hành).  
+Nếu bạn tìm ra bug trong vài thư viện được public và sủa nó trong bản fork trên github, bạn cần cài thư viện từ repo này thay vì bản official (cho đến khi bugfix được hợp và bản đã sửa được phát hành).  
 
-Ns có thể được thực hiện dễ dàng với [inline aliasing](https://getcomposer.org/doc/articles/aliases.md#require-inline-alias):  
+N có thể được thực hiện dễ dàng với [inline aliasing](https://getcomposer.org/doc/articles/aliases.md#require-inline-alias):  
 
     
     {
