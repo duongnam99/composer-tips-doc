@@ -201,7 +201,7 @@ Bạn cũng có thể định nghĩa các extensions được yêu cầu trong �
 Có [composer.json plugin echo PHPStorm](https://plugins.jetbrains.com/plugin/7631-php-composer-json-support). Nó thêm tự động hoàn thiện và xác thực khi thay đổi`composer.json` thủ công.  
 Nếu bạn đang dùng ide khác (hay code editor), bạn có thể thiết lập [JSON schema](https://getcomposer.org/schema.json).  
 
-## Lời khuyên #15: Specify the production PHP version in `composer.json`  
+## Lời khuyên #15: Chỉ rõ phiên bản PHP trong `composer.json`  
 
 Nếu bạn giống tôi và đổi khi [chạy các phiên bản pre-released PHP trên local](https://blog.martinhujer.cz/php-7-2-is-due-in-november-whats-new/), bạn đang gặp vấn đề trong việc cập nhật các dependency lên 1 phiên bản không hoạt động trong sản phẩm. Ngy bây giờ tôi đang sử dụng PHP 7.2.0, có nghĩa là tôi có thể cài đặt các thư viện, mà không hoạt động trên 7.1. Vì sản phẩm đang chạy 7.1, quá trình cài đặt sẽ thất bại.  
 
@@ -280,7 +280,7 @@ Sau khi phát hành bài viết, tôi nhận được vài gợi ý thêm một 
 ## Lời khuyên #18:  Cài đặt prestissimo để tăng tốc độ cài đặt package
 
 Composer plugin [hirak/prestissimo](https://github.com/hirak/prestissimo) sẽ tăng tốc độ cài dependency bằng cách download song song.  
-VÀ điều tốt nhất là? bạn chỉ cần cái 1 lần, trên toàn cục và nó sẽ hoạt độn trên mọi project  
+Và điều tốt nhất là? bạn chỉ cần cái 1 lần, trên toàn cục và nó sẽ hoạt động trên mọi project  
     
     composer global require hirak/prestissimo
     
@@ -289,15 +289,15 @@ VÀ điều tốt nhất là? bạn chỉ cần cái 1 lần, trên toàn cục 
 
 Viết đúng ràng buộc phiên bản có thể là 1 việc khó khăn ngay cả sau khi đọc [tài liệu](https://getcomposer.org/doc/articles/versions.md#writing-version-constraints).  
 
-May măn là có [Packagist Semver Checker](https://semver.mwl.be/), bạn có thể kiểm tra phiên bản nào phù hợp với ràng buộc được khai báo. Thay vì chỉ phân tích ràng buộc phiên bản, nó tải dữ liệu từ Packagist để hiển thị phiên bản được realease hiện tại. 
+May măn là có [Packagist Semver Checker](https://semver.mwl.be/), bạn có thể kiểm tra phiên bản nào phù hợp với ràng buộc được khai báo. Thay vì chỉ phân tích ràng buộc phiên bản, nó tải dữ liệu từ Packagist để hiển thị phiên bản được release hiện tại. 
 
 [the result for `symfony/symfony:^3.1`](https://semver.mwl.be/#?package=symfony%2Fsymfony&version=%5E3.1&minimum-
 stability=stable).
 
 ## Lời khuyên #20: Dùng authoritative class map trong production  
 
-Bạn nên [taoj authoritative class map](https://getcomposer.org/doc/articles/autoloader-optimization.md#optimization-level-2-a-authoritative-class-maps) trong
-production. Nó sẽ tăng tốc load class bằng cách thêm moitj thứ trong class-map và bỏ qua kiểm tra filesystem.
+Bạn nên [tạo authoritative class map](https://getcomposer.org/doc/articles/autoloader-optimization.md#optimization-level-2-a-authoritative-class-maps) trong
+production. Nó sẽ tăng tốc load class bằng cách thêm một thứ trong class-map và bỏ qua kiểm tra filesystem.
 
 bạn có thể thực hiện nó bằng cách chạy lệnh sau như một phần của quá trình xây dựng sản phẩm
 
@@ -307,7 +307,7 @@ bạn có thể thực hiện nó bằng cách chạy lệnh sau như một ph�
 
 ## Lời khuyên #21: Cấu hình `autoload-dev` để tests  
 
-Bạn thường không muốn thêm các file test trong production class map (cì kích thước file và bộ nhớ). Nó có thể thực hiên bằng cách cấu hình `autoload-dev` (tương tự như `autoload`):  
+Bạn thường không muốn thêm các file test trong production class map (vì kích thước file và bộ nhớ). Nó có thể thực hiện bằng cách cấu hình `autoload-dev` (tương tự như `autoload`):  
     
     
     "autoload": {
