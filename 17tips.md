@@ -60,7 +60,7 @@ Vậy tốt nhất là để `composer.lock` vào trong `.gitignore` để bạn
 
 Nếu bạn muốn chắc chắn rằng thư viện tương thích với các phiên bản khác nhau của các dependency, đọc lời khuyên tiếp theo.  
 
-## Tip #7: Chạy các kiến trúc Travis CI với nhiều phiên bản dependency  
+## Lời khyên #7: Chạy các kiến trúc Travis CI với nhiều phiên bản dependency  
 
 > Lời khuyên này chỉ áp dụng cho các thư viện (vì bạn sử dụng các phiên bản cụ thể cho các ứng dụng).  
 
@@ -98,7 +98,7 @@ Mặc dù giải pháp này sẽ khắc phục được hầu hết các vấn �
 
 ## Lời khuyên #8: Sắp xếp các package trong require và require-dev theo tên  
 
-Sẽ rất hay nếu để các package trong mục `require` và `require-dev` được sắp sếp bởi tên. Nó có thể giúp tránh những xung đột gộp không cần thiết khi rebase một nhánh. Bởi vì nếu bạn thêm 1 package vào cuối danh sách trong 2 nhánh, sẽ luôn có những xung đột khi gộp.  
+Sẽ rất hay nếu để các package trong mục `require` và `require-dev` được sắp sếp theo tên. Nó có thể giúp tránh những xung đột gộp không cần thiết khi rebase một nhánh. Bởi vì nếu bạn thêm 1 package vào cuối danh sách trong 2 nhánh, sẽ luôn có những xung đột khi gộp.  
 
 Đây là việc tẻ nhạt  khi làm thủ công, nên tốt nhất là [điều chỉnh]](https://getcomposer.org/doc/06-config.md#sort-packages) trong
 `composer.json`:  
@@ -117,7 +117,7 @@ Lần tới, bạn `require` 1 package mới, nó sẽ được thêm vào chỗ
 
 ## Lời khuyênp #9:  Đừng thử gộp composer.lock khi rebase hay merge  
 
-Nếu bạn thêm 1 dependency mới vào `composer.json` (và `composer.lock`) trước khi nhánh của bạn được gộp, có 1 dependency khác đãđược thêm ở master, bạn cần rebase nhánh của bạn. Và bạn sẽ nhận 1 merge-conflict trong `composer.lock`.  
+Nếu bạn thêm 1 dependency mới vào `composer.json` (và `composer.lock`) trước khi nhánh của bạn được gộp, có 1 dependency khác đã được thêm ở master, bạn cần rebase nhánh của bạn. Và bạn sẽ nhận 1 merge-conflict trong `composer.lock`.  
 
 Bạn đừng bảo giờ cố giải quyết xung đột này thủ công, vì file `composer.lock` chứa từng phần của các dependency đã định nghĩa trong `composer.json`. Vì vậy nếu bạn giải quyết được xung đột, kết quả file lock vẫn sẽ sai.  
 
@@ -152,7 +152,7 @@ Bạn có thể sử dụng câu lệnh `composer oudated` để xem các depend
   3. Chạy lệnh `composer update phpunit/phpunit --with-dependencies` (thay `phpunit/phpunit` bằng thư viện bạn đang update)
   4. Kiểm tra CHANGELOG trong repo thư viện trên Github để xem có sự thay đổi nào hỏng không. Nếu có cập nhật ứng dụng.
   5. Kiểm tra thử ứng dụng trên local (Nếu đang sử dụng Symfony, bạn có thể thấy các cảnh báo phản đối trong Debug Bar)
-  6. Commit các thay đổi (`composer.json`, `composer.lock` và bất cứ thứ gì cần thiết để phiên bản mới hoạ động)
+  6. Commit các thay đổi (`composer.json`, `composer.lock` và bất cứ thứ gì cần thiết để phiên bản mới hoạt động)
   7. Đợi kiến trúc CI hoàn thành
   8. Merge và deploy
 
